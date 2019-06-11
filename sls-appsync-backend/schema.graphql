@@ -1,0 +1,29 @@
+input CreateTodoInput {
+  id: ID
+  name: String!
+  description: String
+}
+
+type Todo {
+  id: Int!
+  name: String!
+  description: String
+}
+
+type Mutation {
+  createTodo(input: CreateTodoInput!): Todo
+}
+
+type Query {
+  todos: [Todo]!
+}
+
+type Subscription {
+  onCreateTodo: Todo @aws_subscribe(mutations: ["createTodo"])
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
